@@ -1,14 +1,15 @@
 import json
 import pytest
 from user import User
+from order import Order
+import random
+
 @pytest.fixture()
 def user_data():
     user = User()
     user_data = user.generate_user_data()
     yield user_data
-    # if courier.created_courier:
-    #     courier.login_courier()
-    #     courier.delete_courier()
+
 
 
 @pytest.fixture()
@@ -37,3 +38,10 @@ def created_user():
     yield created_user
     user.delete_user(access_token)
 
+@pytest.fixture()
+def get_some_ingrs(num):
+    order = Order()
+    data = order.get_ingredients_dict()
+    random_ids = random.sample(list(data.keys()), num)
+    params = {"ingredients": random_ids}
+    yield params
