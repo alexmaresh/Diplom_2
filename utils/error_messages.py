@@ -5,4 +5,3 @@ class ErrorMessages:
     authorized = "You should be authorised"
     email_exists = "User with such email already exists"
     ingrs_err = "Ingredient ids must be provided"
-

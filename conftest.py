@@ -1,8 +1,8 @@
-import json
 import pytest
-from user import User
-from order import Order
+from utils.user import User
+from utils.order import Order
 import random
+
 
 @pytest.fixture()
 def user_data():
@@ -11,32 +11,31 @@ def user_data():
     yield user_data
 
 
-
 @pytest.fixture()
 def delete_user(access_token):
     user = User()
     resp = user.delete_user(access_token)
-    assert resp ==200
+    assert resp == 200
 
 
 @pytest.fixture()
 def logined_user():
     user = User()
     created_user, resp = user.create_user()
-    access_token = resp['accessToken']
+    access_token = resp["accessToken"]
     user.login_user(created_user)
     yield created_user, access_token
     user.delete_user(access_token)
-
 
 
 @pytest.fixture()
 def created_user():
     user = User()
     created_user, resp = user.create_user()
-    access_token = resp['accessToken']
+    access_token = resp["accessToken"]
     yield created_user
     user.delete_user(access_token)
+
 
 @pytest.fixture()
 def get_some_ingrs(num):
